@@ -18,4 +18,13 @@ public class Task {
     public void markUndone() {
         isdone = false;
     }
+
+    public String toString() {
+        if(isdone) {
+            return "[X] " + description;
+        } else {
+            return "[ ] " + description;
+        }
+    }
+
 }

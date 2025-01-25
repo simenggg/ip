@@ -30,30 +30,61 @@ public class Lemon {
 
             } else if(userInput.equals("list")) {
                 for (int i = 1; i < index + 1; i++) {
-                    if(tasks[i - 1].isdone) {
-                        System.out.println(i + ".[X] " + tasks[i - 1].description);
-                    } else {
-                        System.out.println(i + ". [ ]" + tasks[i - 1].description);
-                    }
+                    System.out.println(i + ". " + tasks[i - 1].toString());
                 }
 
             } else if(userInputSplitted[0].equals("mark")){
                 int taskIndex = Integer.parseInt(userInputSplitted[1]);
                 System.out.println("Nice! I've marked this task as done:");
-                System.out.println(" [X] " + tasks[taskIndex - 1].description);
                 tasks[taskIndex - 1].markDone();
+                System.out.println(tasks[taskIndex].toString());
+
 
             } else if(userInputSplitted[0].equals("unmark")) {
                 int taskIndex = Integer.parseInt(userInputSplitted[1]);
                 System.out.println("OK, I've marked this task as not done yet");
-                System.out.println(" [ ] " + tasks[taskIndex - 1].description);
                 tasks[taskIndex - 1].markUndone();
+                System.out.println(tasks[taskIndex].toString());
 
             } else {
                 System.out.println("——————————————————————————————————————————————");
-                Task newTask = new Task(userInput);
-                tasks[index++] = newTask;
-                System.out.println("added: " + userInput);
+                int spaceindex = userInput.indexOf(" ");   //find the index of the first space
+
+                if(userInputSplitted[0].equals("todo")) {
+                    String taskDescription = userInput.substring(spaceindex + 1);
+                    Task newTask = new Todo(taskDescription);
+                    tasks[index++] = newTask;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + newTask.toString());
+                    System.out.println("Now you have " + index + " tasks in the list.");
+
+                } else if(userInputSplitted[0].equals("deadline")) {
+                    String task = userInput.substring(spaceindex + 1);
+                    String[] taskSplitted = task.split("/");
+                    String taskDescription = taskSplitted[0];
+                    int space = taskSplitted[1].indexOf(" ");
+                    String by = taskSplitted[1].substring(space + 1);
+                    Task newTask = new Deadline(taskDescription, by);
+                    tasks[index++] = newTask;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + newTask.toString());
+                    System.out.println("Now you have " + index + " tasks in the list.");
+
+                } else if(userInputSplitted[0].equals("event")) {
+                    String task = userInput.substring(spaceindex + 1);
+                    String[] taskSplitted = task.split("/");
+                    String taskDescription = taskSplitted[0];
+                    int space1 = taskSplitted[1].indexOf(" ");
+                    String start = taskSplitted[1].substring(space1 + 1);
+                    int space2 = taskSplitted[2].indexOf(" ");
+                    String end = taskSplitted[2].substring(space2 + 1);
+                    Task newTask = new Event(taskDescription, start, end);
+                    tasks[index++] = newTask;
+                    System.out.println("Got it. I've added this task:");
+                    System.out.println(" " + newTask.toString());
+                    System.out.println("Now you have " + index + " tasks in the list.");
+                }
+
                 System.out.println("——————————————————————————————————————————————");
             }
         }
