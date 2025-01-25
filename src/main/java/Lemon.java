@@ -9,12 +9,14 @@ public class Lemon {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Scanner scanner = new Scanner(System.in);
-
         System.out.println("——————————————————————————————————————————————");
         System.out.println("Hello! I'm Lemon");
         System.out.println("What can I do for you?");
         System.out.println("——————————————————————————————————————————————");
+
+        Scanner scanner = new Scanner(System.in);
+        String[] tasks = new String[100];
+        int index = 0;
 
         while(true) {
             String userInput = scanner.nextLine();
@@ -23,9 +25,14 @@ public class Lemon {
                 System.out.println("Bye! Have a nice day and hope to see you again soon!");
                 System.out.println("——————————————————————————————————————————————");
                 break;
+            } else if(userInput.equals("list")) {
+                for(int i = 1; i < index + 1; i++) {
+                    System.out.println(i + ". " + tasks[i - 1]);
+                }
             } else {
                 System.out.println("——————————————————————————————————————————————");
-                System.out.println(userInput);
+                tasks[index++] = userInput;
+                System.out.println("added: " + userInput);
                 System.out.println("——————————————————————————————————————————————");
             }
         }
