@@ -30,8 +30,11 @@ public class Lemon {
 
             } else if(userInput.equals("list")) {
                 for (int i = 1; i < index + 1; i++) {
-                    System.out.println(i + ". " + tasks[i - 1].toString());
+                    if(tasks[i - 1] != null) {
+                        System.out.println(i + ". " + tasks[i - 1].toString());
+                    }
                 }
+
 
             } else if(userInputSplitted[0].equals("mark")){
                 int taskIndex = Integer.parseInt(userInputSplitted[1]);
@@ -46,13 +49,29 @@ public class Lemon {
                 tasks[taskIndex - 1].markUndone();
                 System.out.println(tasks[taskIndex].toString());
 
+
+            } else if(userInputSplitted[0].equals("delete")) {
+                int taskIndex = Integer.parseInt(userInputSplitted[1]);
+                System.out.println("Noted. I've removed this task:");
+                System.out.println(tasks[taskIndex - 1].toString());
+                tasks[taskIndex - 1] = null;
+                //problem: there will be empty holes in the array, need to move the tasks to fill in the hole
+                for(int i = taskIndex - 1; i < index + 1; i++) {
+                    Task temp = tasks[i + 1];
+                    tasks[i] = temp;
+                    tasks[i + 1] = null;
+                }
+                index--;
+                System.out.println("Now you have " + index + " tasks in the list.");
+
+
             } else {
                 System.out.println("——————————————————————————————————————————————");
                 int spaceindex = userInput.indexOf(" ");   //find the index of the first space
 
                 if(userInputSplitted[0].equals("todo")) {
                     String taskDescription = userInput.substring(spaceindex + 1);
-                    if(userInputSplitted.length != 2) {
+                    if(userInputSplitted.length < 2) {
                         System.out.println("OOPS the description of todo is not correct!");
                     } else {
                         Task newTask = new Todo(taskDescription);
