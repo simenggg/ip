@@ -1,4 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+import java.io.File;
 
 public class Lemon {
     public static void main(String[] args) {
@@ -14,9 +18,39 @@ public class Lemon {
         System.out.println("What can I do for you?");
         System.out.println("——————————————————————————————————————————————");
 
+
         Scanner scanner = new Scanner(System.in);
         Task[] tasks = new Task[100];
         int index = 0;
+
+
+        File tasklist = new File("tasklist.txt");
+
+        if(!tasklist.exists()) {
+            //check if a tasklist file is present, and create one if it is not present
+            System.out.println("You don't have a tasklist yet. Let me create one for you!");
+            try {
+                if(tasklist.createNewFile()) {
+                    System.out.println("You have created a new tasklist file!");
+                } else {
+                    System.out.println("Tasklist could not be created");
+                }
+            } catch (IOException e) {
+                System.out.println("Error creating tasklist file" + e.getMessage());
+            }
+
+        } else {
+            //load the content of the tasklist
+            try {
+                Scanner scanner2 = new Scanner(tasklist);
+                while(scanner2.hasNextLine()) {
+                    System.out.println(scanner2.nextLine());
+                }
+            } catch (FileNotFoundException e) {
+                    System.out.println("Tasklist could not be found");
+
+            }
+        }
 
         while(true) {
             String userInput = scanner.nextLine();
@@ -75,9 +109,18 @@ public class Lemon {
                         System.out.println("OOPS the description of todo is not correct!");
                     } else {
                         Task newTask = new Todo(taskDescription);
-                        tasks[index++] = newTask;
-                        System.out.println("Got it. I've added this task:");
-                        System.out.println(" " + newTask.toString());
+
+                        //add a task to the tasklist
+                        try {
+                            FileWriter writer = new FileWriter(newTask.toString(),true);
+                            writer.close();
+                            System.out.println("Got it. I've added this task:");
+                            System.out.println(" " + newTask.toString());
+                        } catch(IOException e) {
+                            System.out.println("Error writing to file" + e.getMessage());
+                        }
+                        //tasks[index++] = newTask;
+
                         if(index == 1) {
                             System.out.println("Now you have 1 task in the list.");
                         } else {
@@ -132,4 +175,24 @@ public class Lemon {
 
 
     }
+
+    public void addTask(Task t, int i) {
+        //add a task to the tasklist
+        try {
+            FileWriter writer = new FileWriter(t.toString(),true);
+            writer.close();
+            System.out.println("Got it. I've added this task:");
+            System.out.println(" " + t.toString());
+        } catch(IOException e) {
+            System.out.println("Error writing to file" + e.getMessage());
+        }
+        //tasks[index++] = newTask;
+
+        if(i == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        } else {
+            System.out.println("Now you have " + i + " tasks in the list.");
+        }
+    }
+
 }
