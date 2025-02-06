@@ -1,8 +1,10 @@
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Scanner;
 import java.io.File;
+
 
 public class Lemon {
     public static void main(String[] args) {
@@ -59,9 +61,16 @@ public class Lemon {
 
                     } else if(split_by_part.length == 2) {
                         //deadline
+                        //problem: the time representation only apply to deadline tasks and not event tasks, not consistent
                         String description = split_by_part[0];
                         String by = split_by_part[1];
-                        Deadline deadlineTask = new Deadline(description, by);
+                        String[] deadlinedate = split_by_part[1].split("-");
+                        int year = Integer.parseInt(deadlinedate[0]);
+                        int month = Integer.parseInt(deadlinedate[1]);
+                        int day = Integer.parseInt(deadlinedate[2]);
+                        LocalDate date = LocalDate.of(year, month, day);
+                        Deadline deadlineTask = new Deadline(description, date);
+                        //Deadline deadlineTask = new Deadline(description, by);
                         if(split_by_character[4].equals("X")) {
                             deadlineTask.isdone = true;
                         }
@@ -169,7 +178,15 @@ public class Lemon {
                     } else {
                         int space = taskSplitted[1].indexOf(" ");
                         String by = taskSplitted[1].substring(space + 1);
-                        Task newTask = new Deadline(taskDescription, by);
+
+                        //create a localDate object, accepting date input as yyyy-mm-dd
+                        String[] splittedBy = by.split("-");
+                        int year = Integer.parseInt(splittedBy[0]);
+                        int month = Integer.parseInt(splittedBy[1]);
+                        int day = Integer.parseInt(splittedBy[2]);
+                        LocalDate deadlineDate = LocalDate.of(year, month, day);
+
+                        Task newTask = new Deadline(taskDescription, deadlineDate);
                         tasks[index] = newTask;
                         index++;
                         printTask(newTask, index);
