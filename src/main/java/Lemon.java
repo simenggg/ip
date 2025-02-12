@@ -49,12 +49,13 @@ public class Lemon {
                     if (parts[0].equals("todo")) {
                         Todo newTask = new Todo(parts[0]);
                         tasklist.addTask(newTask);
-                    } else if (parts[0].equals("deadaline")) {
-                        String[] details = parts[1].split("/by");
+                    } else if (parts[0].equals("deadline")) {
+                        //some problems with creating deadline task
+                        String[] details = parts[1].split("/by ");
                         Deadline newTask = new Deadline(details[0], LocalDate.parse(details[1]));
                         tasklist.addTask(newTask);
                     } else if (parts[0].equals("event")) {
-                        String[] details = parts[1].split("/from | /to");
+                        String[] details = parts[1].split("/from | /to ");
                         Event newTask = new Event(details[0], details[1], details[2]);
                         tasklist.addTask(newTask);
                     }

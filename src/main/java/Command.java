@@ -1,7 +1,3 @@
-public enum CommandType {
-    LIST, ADD, DELETE, MARK, UNMARK, EXIT, UNKNOWN
-}
-
 public class Command {
     private final CommandType type;
     private final String argument;

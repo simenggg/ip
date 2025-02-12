@@ -16,7 +16,7 @@ public class UI {
         System.out.println("Hello from\n" + logo);
 
         System.out.println("——————————————————————————————————————————————");
-        System.out.println("Hello! I'm Lemon");
+        System.out.println("Hello! I'm Lemon, your task manager!");
         System.out.println("What can I do for you?");
         System.out.println("——————————————————————————————————————————————");
 
