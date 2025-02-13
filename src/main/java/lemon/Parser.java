@@ -1,3 +1,5 @@
+package lemon;
+
 public class Parser {
     public static Command parse(String userInput) {
         String[] parts = userInput.split(" ", 2);

@@ -1,7 +1,10 @@
+package lemon;
+
+
 import java.util.ArrayList;
 
 public class Tasklist {
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public Tasklist(ArrayList<Task> tasks) {
         this.tasks = tasks;

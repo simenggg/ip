@@ -1,10 +1,13 @@
+package lemon;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
+
 
 public class Storage {
     private String filePath;
@@ -14,7 +17,7 @@ public class Storage {
     }
 
     public ArrayList<Task> loadTasks() {
-        ArrayList<Task> tasks = new ArrayList<Task>();
+        ArrayList<Task> tasks = new ArrayList<lemon.Task>();
         File file = new File(filePath);
 
         if (!file.exists()) {

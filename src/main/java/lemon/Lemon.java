@@ -1,15 +1,11 @@
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.io.File;
+package lemon;
 
+import java.time.LocalDate;
 
 public class Lemon {
-    private UI ui;
-    private Storage storage;
-    private Tasklist tasklist;
+    private final UI ui;
+    private final Storage storage;
+    private final Tasklist tasklist;
 
     public Lemon(String filepath) {
         this.storage = new Storage(filepath);
@@ -47,7 +43,7 @@ public class Lemon {
                 case ADD:
                     String[] parts = input.split(" ", 2);
                     if (parts[0].equals("todo")) {
-                        Todo newTask = new Todo(parts[0]);
+                        Todo newTask = new Todo(parts[1]);
                         tasklist.addTask(newTask);
                     } else if (parts[0].equals("deadline")) {
                         //some problems with creating deadline task

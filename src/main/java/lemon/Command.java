@@ -1,3 +1,5 @@
+package lemon;
+
 public class Command {
     private final CommandType type;
     private final String argument;
