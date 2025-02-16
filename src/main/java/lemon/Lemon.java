@@ -2,6 +2,7 @@ package lemon;
 
 import java.time.LocalDate;
 
+
 public class Lemon {
     private final UI ui;
     private final Storage storage;
@@ -41,10 +42,14 @@ public class Lemon {
                     tasklist.deleteTask(Integer.parseInt(parts3[1]));
                     break;
                 case ADD:
+
+                    //need to deal with the exception that description is not complete
                     String[] parts = input.split(" ", 2);
                     if (parts[0].equals("todo")) {
+                        Todo.checkValidity(input);
                         Todo newTask = new Todo(parts[1]);
                         tasklist.addTask(newTask);
+
                     } else if (parts[0].equals("deadline")) {
                         //some problems with creating deadline task
                         String[] details = parts[1].split("/by ");
