@@ -10,7 +10,8 @@ public class UI {
     }
 
     public void displayWelcomeMessage() {
-        String logo = "   ____   __       __    ____   __    __\n"
+        String logo =
+                "  __     _____  ___      ___   ____   __    __\n"
                 + "| |   |  __ | ||\\    //|| //    \\ ||\\  ||\n"
                 + "| |   | |___  || \\  // || ||    || || \\ ||\n"
                 + "| |__ | |___| ||  \\//  || ||    || ||  \\||\n"
