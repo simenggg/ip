@@ -14,6 +14,8 @@ public class Parser {
                 return new Command(CommandType.MARK);
             case "unmark":
                 return new Command(CommandType.UNMARK);
+            case "find":
+                return new Command(CommandType.FIND);
             case "bye":
                 return new Command(CommandType.EXIT);
             case "todo":

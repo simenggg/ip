@@ -41,8 +41,11 @@ public class Lemon {
                     String[] parts3 = input.split(" ");
                     tasklist.deleteTask(Integer.parseInt(parts3[1]));
                     break;
+                case FIND:
+                    String[] parts4 = input.split(" ");
+                    tasklist.findTask(parts4[1]);
+                    break;
                 case ADD:
-
                     //need to deal with the exception that description is not complete
                     String[] parts = input.split(" ", 2);
                     if (parts[0].equals("todo")) {

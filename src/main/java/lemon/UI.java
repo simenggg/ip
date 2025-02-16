@@ -17,7 +17,6 @@ public class UI {
                 + "| |__ | |___| ||  \\//  || ||    || ||  \\||\n"
                 + "|____||__,__| ||   __   ||  \\__//  ||   \\|\n";
         System.out.println("Hello from\n" + logo);
-
         System.out.println("Hello! I'm Lemon, your task manager!");
         System.out.println("What can I do for you?");
 

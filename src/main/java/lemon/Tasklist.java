@@ -48,6 +48,24 @@ public class Tasklist {
         System.out.println(tasks.get(index - 1).toString());
     }
 
+    public void findTask(String keyword) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                foundTasks.add(task);
+            }
+        }
+        if(foundTasks.size() == 0) {
+            System.out.println("Oh no! There is no task with this keyword.");
+        } else {
+            int index = 1;
+            for(Task task : foundTasks) {
+                System.out.println(index + ". " + task.toString());
+                index++;
+            }
+        }
+    }
+
     public void listTask() {
         if(tasks.isEmpty()) {
             System.out.println("There are no tasks in the list yet!");
