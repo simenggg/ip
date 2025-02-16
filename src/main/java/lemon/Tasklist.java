@@ -26,12 +26,6 @@ public class Tasklist {
         System.out.println("Noted. I've removed this task:");
         System.out.println(tasks.get(index - 1).toString());
         tasks.remove(index - 1);
-        //problem: there will be empty holes in the array, need to move the tasks to fill in the hole
-        /*for (int i = index - 1; i < tasks.size(); i++) {
-            Task temp = tasks.get(i + 1);
-            tasks.set(i, temp);
-            tasks.set(i + 1, null);
-        } */
         System.out.println("Now you have " + index + " tasks in the list.");
     }
 
