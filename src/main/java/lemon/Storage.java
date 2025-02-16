@@ -44,40 +44,40 @@ public class Storage {
                     String taskDescription = line.substring(6);
                     //need to create specific type of task instead of task in general
                     //but have a lot ot repetitive code...
-                    String[] split_by_character = line.split("");
-                    String[] split_by_part = taskDescription.split("/");
-                    if(split_by_part.length == 1) {
+                    String[] splitByCharacter = line.split("");
+                    String[] splitByPart = taskDescription.split("/");
+                    if(splitByPart.length == 1) {
                         //to do
                         Todo todoTask = new Todo(taskDescription);
-                        if(split_by_character[4].equals("X")) {
-                            todoTask.isdone = true;
+                        if(splitByCharacter[4].equals("X")) {
+                            todoTask.isDone = true;
                         }
                         tasks.add(todoTask);
 
-                    } else if(split_by_part.length == 2) {
+                    } else if(splitByPart.length == 2) {
                         //deadline
                         //problem: the time representation only apply to deadline tasks and not event tasks, not consistent
-                        String description = split_by_part[0];
-                        String[] deadlinedate = split_by_part[1].split("-");
-                        int year = Integer.parseInt(deadlinedate[0]);
-                        int month = Integer.parseInt(deadlinedate[1]);
-                        int day = Integer.parseInt(deadlinedate[2]);
+                        String description = splitByPart[0];
+                        String[] deadlineDate = splitByPart[1].split("-");
+                        int year = Integer.parseInt(deadlineDate[0]);
+                        int month = Integer.parseInt(deadlineDate[1]);
+                        int day = Integer.parseInt(deadlineDate[2]);
                         LocalDate date = LocalDate.of(year, month, day);
                         Deadline deadlineTask = new Deadline(description, date);
                         //Deadline deadlineTask = new Deadline(description, by);
-                        if(split_by_character[4].equals("X")) {
-                            deadlineTask.isdone = true;
+                        if(splitByCharacter[4].equals("X")) {
+                            deadlineTask.isDone = true;
                         }
                         tasks.add(deadlineTask);
 
-                    } else if(split_by_part.length == 3) {
+                    } else if(splitByPart.length == 3) {
                         //event
-                        String description = split_by_part[0];
-                        String start = split_by_part[1];
-                        String end = split_by_part[2];
+                        String description = splitByPart[0];
+                        String start = splitByPart[1];
+                        String end = splitByPart[2];
                         Event eventTask = new Event(description, start, end);
-                        if(split_by_character[4].equals("X")) {
-                            eventTask.isdone = true;
+                        if(splitByCharacter[4].equals("X")) {
+                            eventTask.isDone = true;
                         }
                         tasks.add(eventTask);
                     }

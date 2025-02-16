@@ -2,27 +2,27 @@ package lemon;
 
 public class Task {
     protected String description;
-    protected boolean isdone;
+    protected boolean isDone;
 
     public Task(String description) {
         this.description = description;
-        this.isdone = false;
+        this.isDone = false;
     }
 
     public boolean getStatus() {
-        return isdone;
+        return isDone;
     }
 
     public void markDone() {
-        isdone = true;
+        isDone = true;
     }
 
     public void markUndone() {
-        isdone = false;
+        isDone = false;
     }
 
     public String toString() {
-        if(isdone) {
+        if(isDone) {
             return "[X] " + description;
         } else {
             return "[ ] " + description;
