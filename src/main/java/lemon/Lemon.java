@@ -1,3 +1,8 @@
+/**
+ * This is the main entry point for the chatbot Lemon, which can help manage your tasks
+ * This class creates the chatbot, processes ths user inputs and manage interactions
+ */
+
 package lemon;
 
 import java.time.LocalDate;

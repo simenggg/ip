@@ -1,3 +1,9 @@
+/**
+ * Represents a parser that can parse the user commands
+ * It extracts the first word from the user command,
+ * identity the type of command and create a Command object
+ */
+
 package lemon;
 
 public class Parser {
