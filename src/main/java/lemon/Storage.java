@@ -1,3 +1,9 @@
+/**
+ * This class deals with operations that involves storage such as
+ * loading the tasklist file from memory to the chatbot
+ * and overwriting the tasklist file after changes are made through the chatbot
+ */
+
 package lemon;
 
 import java.io.File;
@@ -12,10 +18,21 @@ import java.time.LocalDate;
 public class Storage {
     private String filePath;
 
+    /**
+     * Construct a file for storage with a specified file path
+     * @param filePath The path of the file
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+
+    /**
+     * Check if the file for storage of a specified path is present
+     * If not present, create a new file of that path for storage of the tasklist
+     * If present, load the content of the file to the chatbot
+     * @return The arraylist that contains all the tasks in the specified storage file
+     */
     public ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<lemon.Task>();
         File file = new File(filePath);
@@ -89,6 +106,12 @@ public class Storage {
         }
 
     }
+
+
+    /**
+     * Write the tasklist to the specified storage file
+     * @param tasks The arraylist that contains all the tasks from user input
+     */
 
     public void storeTasks(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter("tasklist.txt")) {

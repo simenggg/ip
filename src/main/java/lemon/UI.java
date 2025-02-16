@@ -1,6 +1,12 @@
+/**
+ * This class deals with interaction with the user
+ * It includes messages printed to the user on various occasions
+ */
+
 package lemon;
 
 import java.util.Scanner;
+
 
 public class UI {
     private Scanner scanner;
