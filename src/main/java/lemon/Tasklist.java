@@ -24,16 +24,18 @@ public class Tasklist {
      * Add a task to the tasklist
      * @param task The task to be added
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         //do not need to split into three categories, will handle in the main class
         tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(" " + task.toString());
+        StringBuilder sb = new StringBuilder();
+        sb.append("Got it. I've added this task:").append("\n");
+        sb.append(" " + task.toString()).append("\n");
         if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            sb.append("Now you have 1 task in the list.");
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            sb.append("Now you have " + tasks.size() + " tasks in the list.");
         }
+        return sb.toString();
     }
 
 
@@ -41,11 +43,13 @@ public class Tasklist {
      * Delete a task from the tasklist
      * @param index The index of the task in the tasklist to be deleted
      */
-    public void deleteTask(int index) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(tasks.get(index - 1).toString());
+    public String deleteTask(int index) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Noted. I've removed this task:").append("\n");
+        sb.append(tasks.get(index - 1).toString()).append("\n");
         tasks.remove(index - 1);
-        System.out.println("Now you have " + index + " tasks in the list.");
+        sb.append("Now you have " + index + " tasks in the list.");
+        return sb.toString();
     }
 
 
@@ -53,11 +57,12 @@ public class Tasklist {
      * Mark a task as done
      * @param index The index of the task in the tasklist that is to be marked as done
      */
-    public void markTask(int index) {
-        System.out.println("Nice! I've marked this task as done:");
+    public String markTask(int index) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Nice! I've marked this task as done:").append("\n");
         tasks.get(index - 1).markDone();
-        System.out.println(tasks.get(index - 1).toString());
-
+        sb.append(tasks.get(index - 1).toString());
+        return sb.toString();
     }
 
 
@@ -65,13 +70,15 @@ public class Tasklist {
      * Mark a task as not done
      * @param index The index of the task in the tasklist that is to be marked as not done
      */
-    public void unmarkTask(int index) {
-        System.out.println("OK, I've marked this task as not done yet");
+    public String unmarkTask(int index) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("OK, I've marked this task as not done yet").append("\n");
         tasks.get(index - 1).markUndone();
-        System.out.println(tasks.get(index - 1).toString());
+        sb.append(tasks.get(index - 1).toString());
+        return sb.toString();
     }
 
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.toString().contains(keyword)) {
@@ -79,23 +86,27 @@ public class Tasklist {
             }
         }
         if(foundTasks.size() == 0) {
-            System.out.println("Oh no! There is no task with this keyword.");
+            return "Oh no! There is no task with this keyword.";
         } else {
+            StringBuilder sb = new StringBuilder();
             int index = 1;
             for(Task task : foundTasks) {
-                System.out.println(index + ". " + task.toString());
+                sb.append(index + ". " + task.toString()).append("\n");
                 index++;
             }
+            return sb.toString();
         }
     }
 
-    public void listTask() {
+    public String listTask() {
         if(tasks.isEmpty()) {
-            System.out.println("There are no tasks in the list yet!");
+            return "There are no tasks in the list yet!";
         } else {
-            for(Task task: tasks) {
-                System.out.println(task);
+            StringBuilder sb = new StringBuilder();
+            for (Task task : tasks) {
+                sb.append(task.toString()).append("\n");
             }
+            return sb.toString();
         }
 
     }

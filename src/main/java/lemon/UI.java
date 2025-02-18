@@ -15,25 +15,26 @@ public class UI {
         scanner = new Scanner(System.in);
     }
 
-    public void displayWelcomeMessage() {
+    public String displayWelcomeMessage() {
+        StringBuilder sb = new StringBuilder();
         String logo =
                 "  __     _____  ___      ___   ____   __    __\n"
                 + "| |   |  __ | ||\\    //|| //    \\ ||\\  ||\n"
                 + "| |   | |___  || \\  // || ||    || || \\ ||\n"
                 + "| |__ | |___| ||  \\//  || ||    || ||  \\||\n"
                 + "|____||__,__| ||   __   ||  \\__//  ||   \\|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Lemon, your task manager!");
-        System.out.println("What can I do for you?");
-
+        sb.append("Hello from\n" + logo).append("\n");
+        sb.append("Hello! I'm Lemon, your task manager!");
+        sb.append("What can I do for you?");
+        return sb.toString();
     }
 
-    public void displayExitMessage() {
-        System.out.println("Bye! Have a nice day and hope to see you again soon!");
+    public String displayExitMessage() {
+        return "Bye! Have a nice day and hope to see you again soon!";
     }
 
-    public void displayConfusionMessage() {
-        System.out.println("Ohh sorry I don't understand this...");
+    public String displayConfusionMessage() {
+        return "Ohh sorry I don't understand this...";
     }
 
     public String getInput() {

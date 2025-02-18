@@ -10,7 +10,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Scanner;
 import java.time.LocalDate;
 
@@ -57,7 +59,6 @@ public class Storage {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-
                     String taskDescription = line.substring(6);
                     //need to create specific type of task instead of task in general
                     //but have a lot ot repetitive code...
@@ -75,11 +76,14 @@ public class Storage {
                         //deadline
                         //problem: the time representation only apply to deadline tasks and not event tasks, not consistent
                         String description = splitByPart[0];
-                        String[] deadlineDate = splitByPart[1].split("-");
-                        int year = Integer.parseInt(deadlineDate[0]);
-                        int month = Integer.parseInt(deadlineDate[1]);
-                        int day = Integer.parseInt(deadlineDate[2]);
-                        LocalDate date = LocalDate.of(year, month, day);
+                        String dateString = splitByPart[1].toLowerCase();
+                        String[] parts = dateString.split(" ");
+                        parts[1] = parts[1].substring(0, 1).toUpperCase() + parts[1].substring(1);
+                        dateString = String.join(" ", parts);
+
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+                        LocalDate date = LocalDate.parse(dateString, formatter);
+
                         Deadline deadlineTask = new Deadline(description, date);
                         //Deadline deadlineTask = new Deadline(description, by);
                         if(splitByCharacter[4].equals("X")) {

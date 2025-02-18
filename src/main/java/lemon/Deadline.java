@@ -20,7 +20,6 @@ public class Deadline extends Task{
     public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
-        //this.by = by;
     }
 
 
@@ -29,7 +28,6 @@ public class Deadline extends Task{
     public String toString() {
         return "[D]" + super.toString() + "/"
                 + date.getDayOfMonth() + " " + date.getMonth() + " " + date.getYear();
-                //+ "(by: " + by + ")";
     }
 
 }
