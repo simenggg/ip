@@ -50,13 +50,12 @@ public class Lemon {
         case ADD:
             //need to deal with the exception that description is not complete
             String[] parts = input.split(" ", 2);
+            assert parts.length == 2;
             if (parts[0].equals("todo")) {
-                Todo.checkValidity(input);
                 Todo newTask = new Todo(parts[1]);
                 message = tasklist.addTask(newTask);
 
             } else if (parts[0].equals("deadline")) {
-                //some problems with creating deadline task
                 String[] details = parts[1].split("/by ");
                 Deadline newTask = new Deadline(details[0], LocalDate.parse(details[1]));
                 message = tasklist.addTask(newTask);

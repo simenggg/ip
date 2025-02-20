@@ -25,7 +25,6 @@ public class Tasklist {
      * @param task The task to be added
      */
     public String addTask(Task task) {
-        //do not need to split into three categories, will handle in the main class
         tasks.add(task);
         StringBuilder sb = new StringBuilder();
         sb.append("Got it. I've added this task:").append("\n");
@@ -44,6 +43,7 @@ public class Tasklist {
      * @param index The index of the task in the tasklist to be deleted
      */
     public String deleteTask(int index) {
+        assert index >= 0 && index < tasks.size(): "index of the task should be valid";
         StringBuilder sb = new StringBuilder();
         sb.append("Noted. I've removed this task:").append("\n");
         sb.append(tasks.get(index - 1).toString()).append("\n");
@@ -58,6 +58,7 @@ public class Tasklist {
      * @param index The index of the task in the tasklist that is to be marked as done
      */
     public String markTask(int index) {
+        assert index >= 0 && index < tasks.size(): "index of the task should be valid";
         StringBuilder sb = new StringBuilder();
         sb.append("Nice! I've marked this task as done:").append("\n");
         tasks.get(index - 1).markDone();
@@ -71,6 +72,7 @@ public class Tasklist {
      * @param index The index of the task in the tasklist that is to be marked as not done
      */
     public String unmarkTask(int index) {
+        assert index >= 0 && index < tasks.size(): "index of the task should be valid";
         StringBuilder sb = new StringBuilder();
         sb.append("OK, I've marked this task as not done yet").append("\n");
         tasks.get(index - 1).markUndone();
@@ -78,6 +80,12 @@ public class Tasklist {
         return sb.toString();
     }
 
+
+    /**
+     * Find all tasks with the given keyword
+     * @param keyword The keyword which the tasks you want to find contains
+     * @return The tasks that contain the given keyword
+     */
     public String findTask(String keyword) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task task : tasks) {
