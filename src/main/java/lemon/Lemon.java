@@ -47,6 +47,15 @@ public class Lemon {
             String[] parts4 = input.split(" ");
             message = tasklist.findTask(parts4[1]);
             break;
+        case HELP:
+            message = Help.getHelpPage();
+            break;
+        case HELP_TECH:
+            message = Help.getTechHelp();
+            break;
+        case HELP_EMO:
+            message = Help.getEmoHelp();
+            break;
         case ADD:
             message = handleAddingTask(input);
             break;

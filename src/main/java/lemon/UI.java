@@ -30,7 +30,7 @@ public class UI {
     }
 
     public String displayExitMessage() {
-        return "Bye! Have a nice day and hope to see you again soon!";
+        return "Bye! Have a nice day and hope to see you again soon! \uD83D\uDE0A";
     }
 
     public String displayConfusionMessage() {

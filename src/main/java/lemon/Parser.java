@@ -22,6 +22,12 @@ public class Parser {
             return new Command(CommandType.UNMARK);
         case "bye":
             return new Command(CommandType.EXIT);
+        case "help":
+            return new Command(CommandType.HELP);
+        case "technical":
+            return new Command(CommandType.HELP_TECH);
+        case "emotional":
+            return new Command(CommandType.HELP_EMO);
         case "todo":
         case "deadline":
         case "event":
