@@ -78,10 +78,8 @@ public class Storage {
                         String[] parts = dateString.split(" ");
                         parts[1] = parts[1].substring(0, 1).toUpperCase() + parts[1].substring(1);
                         dateString = String.join(" ", parts);
-
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
                         LocalDate date = LocalDate.parse(dateString, formatter);
-
                         Deadline deadlineTask = new Deadline(description, date);
                         if(splitByCharacter[4].equals("X")) {
                             deadlineTask.isDone = true;
