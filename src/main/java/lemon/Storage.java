@@ -60,8 +60,6 @@ public class Storage {
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
                     String taskDescription = line.substring(6);
-                    //need to create specific type of task instead of task in general
-                    //but have a lot ot repetitive code...
                     String[] splitByCharacter = line.split("");
                     String[] splitByPart = taskDescription.split("/");
                     if(splitByPart.length == 1) {
@@ -85,7 +83,6 @@ public class Storage {
                         LocalDate date = LocalDate.parse(dateString, formatter);
 
                         Deadline deadlineTask = new Deadline(description, date);
-                        //Deadline deadlineTask = new Deadline(description, by);
                         if(splitByCharacter[4].equals("X")) {
                             deadlineTask.isDone = true;
                         }
