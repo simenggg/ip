@@ -75,7 +75,6 @@ public class Lemon {
             addMessage = tasklist.addTask(newTask);
 
         } else if (parts[0].equals("deadline")) {
-            //some problems with creating deadline task
             String[] details = parts[1].split("/by ");
             Deadline newTask = new Deadline(details[0], LocalDate.parse(details[1]));
             addMessage = tasklist.addTask(newTask);
@@ -88,7 +87,6 @@ public class Lemon {
         return addMessage;
     }
 
-    //need to fix these two methods, how they can fit into the MainWindow class
     public String run() {
         return ui.displayWelcomeMessage();
     }

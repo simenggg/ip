@@ -59,44 +59,7 @@ public class Storage {
                 Scanner scanner = new Scanner(file);
                 while (scanner.hasNextLine()) {
                     String line = scanner.nextLine();
-                    String taskDescription = line.substring(6);
-                    String[] splitByCharacter = line.split("");
-                    String[] splitByPart = taskDescription.split("/");
-                    if(splitByPart.length == 1) {
-                        //to do
-                        Todo todoTask = new Todo(taskDescription);
-                        if(splitByCharacter[4].equals("X")) {
-                            todoTask.isDone = true;
-                        }
-                        tasks.add(todoTask);
-
-                    } else if(splitByPart.length == 2) {
-                        //deadline
-                        //problem: the time representation only apply to deadline tasks and not event tasks, not consistent
-                        String description = splitByPart[0];
-                        String dateString = splitByPart[1].toLowerCase();
-                        String[] parts = dateString.split(" ");
-                        parts[1] = parts[1].substring(0, 1).toUpperCase() + parts[1].substring(1);
-                        dateString = String.join(" ", parts);
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
-                        LocalDate date = LocalDate.parse(dateString, formatter);
-                        Deadline deadlineTask = new Deadline(description, date);
-                        if(splitByCharacter[4].equals("X")) {
-                            deadlineTask.isDone = true;
-                        }
-                        tasks.add(deadlineTask);
-
-                    } else if(splitByPart.length == 3) {
-                        //event
-                        String description = splitByPart[0];
-                        String start = splitByPart[1];
-                        String end = splitByPart[2];
-                        Event eventTask = new Event(description, start, end);
-                        if(splitByCharacter[4].equals("X")) {
-                            eventTask.isDone = true;
-                        }
-                        tasks.add(eventTask);
-                    }
+                    loadSingleTask(line, tasks);
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Tasklist could not be found");
@@ -106,12 +69,55 @@ public class Storage {
 
     }
 
+    /**
+     * Load a single task from the text file into the arraylist of tasks
+     * @param line A line of user input describing one task
+     * @param tasks The arraylist of tasks to which the task is to be added
+     */
+    public void loadSingleTask(String line, ArrayList<Task> tasks) {
+        String taskDescription = line.substring(6);
+        String[] splitByCharacter = line.split("");
+        String[] splitByPart = taskDescription.split("/");
+        if(splitByPart.length == 1) {
+            //to do
+            Todo todoTask = new Todo(taskDescription);
+            if(splitByCharacter[4].equals("X")) {
+                todoTask.isDone = true;
+            }
+            tasks.add(todoTask);
+        } else if(splitByPart.length == 2) {
+            //deadline
+            //problem: the time representation only apply to deadline tasks and not event tasks, not consistent
+            String description = splitByPart[0];
+            String dateString = splitByPart[1].toLowerCase();
+            String[] parts = dateString.split(" ");
+            parts[1] = parts[1].substring(0, 1).toUpperCase() + parts[1].substring(1);
+            dateString = String.join(" ", parts);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", Locale.ENGLISH);
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            Deadline deadlineTask = new Deadline(description, date);
+            if(splitByCharacter[4].equals("X")) {
+                deadlineTask.isDone = true;
+            }
+            tasks.add(deadlineTask);
+        } else if(splitByPart.length == 3) {
+            //event
+            String description = splitByPart[0];
+            String start = splitByPart[1];
+            String end = splitByPart[2];
+            Event eventTask = new Event(description, start, end);
+            if(splitByCharacter[4].equals("X")) {
+                eventTask.isDone = true;
+            }
+            tasks.add(eventTask);
+        }
+
+    }
 
     /**
      * Write the tasklist to the specified storage file
      * @param tasks The arraylist that contains all the tasks from user input
      */
-
     public void storeTasks(ArrayList<Task> tasks) {
         try (FileWriter writer = new FileWriter("tasklist.txt")) {
             for(Task task: tasks) {

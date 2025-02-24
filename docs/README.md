@@ -118,3 +118,5 @@ If not, it will reply:
 ```
 ## Exiting the chatbot: `bye`
 Type `bye` to exit the chatbot
+
+**Important Note**: Only when you entred `bye` the changes you made to the task list can be saved!
