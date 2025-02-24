@@ -18,14 +18,15 @@ public class UI {
     public String displayWelcomeMessage() {
         StringBuilder sb = new StringBuilder();
         String logo =
-                "  __     _____  ___      ___   ____   __    __\n"
-                + "| |   |  __ | ||\\    //|| //    \\ ||\\  ||\n"
-                + "| |   | |___  || \\  // || ||    || || \\ ||\n"
-                + "| |__ | |___| ||  \\//  || ||    || ||  \\||\n"
-                + "|____||__,__| ||   __   ||  \\__//  ||   \\|\n";
+                  "__     _____  ___      ___   ____   __    __\n"
+                + "| |    |         ||\\\\    // || //    \\\\  ||\\\\    ||\n"
+                + "| |    |____   || \\\\  //  || ||      ||  || \\\\   ||\n"
+                + "| |__ |----   ||  \\\\//   || ||      ||  ||  \\\\  ||\n"
+                + "|___| |_____ ||   \\\\//  || \\\\__//   ||   \\\\ ||\n";
         sb.append("Hello from\n" + logo).append("\n");
-        sb.append("Hello! I'm Lemon, your task manager!");
-        sb.append("What can I do for you?");
+        sb.append("Hello! I'm Lemon, your task manager!").append("\n");
+        sb.append("What can I do for you?").append("\n");
+        sb.append("You can type 'help' to see the user guide!");
         return sb.toString();
     }
 

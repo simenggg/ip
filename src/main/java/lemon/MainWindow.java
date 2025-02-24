@@ -37,8 +37,13 @@ public class MainWindow extends AnchorPane {
     /** Injects the Lemon instance */
     public void setLemon(Lemon l) {
         lemon = l;
+        displayWelcomeMessage();
     }
 
+    private void displayWelcomeMessage() {
+        String welcomeMessage = lemon.run();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
+    }
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
