@@ -48,7 +48,6 @@ public class Tasklist {
         sb.append("\uD83D\uDC4C Noted. I've removed this task:").append("\n");
         sb.append(tasks.get(index - 1).toString()).append("\n");
         tasks.remove(index - 1);
-        index--;
         sb.append("Now you have " + tasks.size() + " tasks in the list.");
         return sb.toString();
     }
@@ -65,6 +64,7 @@ public class Tasklist {
         tasks.get(index - 1).markDone();
         sb.append(tasks.get(index - 1).toString());
         return sb.toString();
+
     }
 
 

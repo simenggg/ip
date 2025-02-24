@@ -41,6 +41,10 @@ public class UI {
         return "Sorry, the format of the command is not correct!";
     }
 
+    public String displayInvalidIndexMessage() {
+        return "Sorry, the index you are out of range!";
+    }
+
     public String getInput() {
         return scanner.nextLine();
     }

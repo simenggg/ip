@@ -6,6 +6,7 @@
 package lemon;
 
 import java.time.LocalDate;
+import java.util.function.Function;
 
 
 public class Lemon {
@@ -32,7 +33,6 @@ public class Lemon {
                 message = tasklist.listTask();
             }
             break;
-
         case EXIT:
             if(inputLength > 1) {
                 message = ui.displayWrongFormatMessage();
@@ -41,49 +41,15 @@ public class Lemon {
                 message = ui.displayExitMessage();
             }
             break;
-
         case MARK:
-            if(inputLength != 2) {
-                message = ui.displayWrongFormatMessage();
-            } else {
-                String[] parts1 = input.split(" ");
-                try {
-                    int index = Integer.parseInt(parts1[1]);
-                    message = tasklist.markTask(index);
-                } catch (NumberFormatException e) {
-                    message = ui.displayWrongFormatMessage();
-                }
-            }
+            message = handleTaskIndex(input, tasklist::markTask);
             break;
-
         case UNMARK:
-            if(inputLength != 2) {
-                message = ui.displayWrongFormatMessage();
-            } else {
-                String[] parts2 = input.split(" ");
-                try {
-                    int index = Integer.parseInt(parts2[1]);
-                    message = tasklist.unmarkTask(index);
-                } catch (NumberFormatException e) {
-                    message = ui.displayWrongFormatMessage();
-                }
-            }
+            message = handleTaskIndex(input, tasklist::unmarkTask);
             break;
-
         case DELETE:
-            if(inputLength != 2) {
-                message = ui.displayWrongFormatMessage();
-            } else {
-                String[] parts3 = input.split(" ");
-                try {
-                    int index = Integer.parseInt(parts3[1]);
-                    message = tasklist.deleteTask(index);
-                } catch (NumberFormatException e) {
-                    message = ui.displayWrongFormatMessage();
-                }
-            }
+            message = handleTaskIndex(input, tasklist::deleteTask);
             break;
-
         case FIND:
             if(inputLength < 2) {
                 message = ui.displayWrongFormatMessage();
@@ -139,6 +105,27 @@ public class Lemon {
             }
         }
         return addMessage;
+    }
+
+    public String handleTaskIndex(String input, Function<Integer, String> func) {
+        String[] parts = input.split(" ");
+        String returnMessage = "";
+        if (parts.length != 2) {
+            returnMessage = ui.displayWrongFormatMessage();
+        } else {
+            try {
+                Integer.parseInt(parts[1]);
+            } catch (NumberFormatException e) {
+                return ui.displayInvalidIndexMessage();
+            }
+            int index = Integer.parseInt(parts[1]);
+            if(index <= 0 || index > tasklist.getTasks().size()) {
+                returnMessage = ui.displayWrongFormatMessage();
+            } else {
+                returnMessage = func.apply(index);
+            }
+        }
+        return returnMessage;
     }
 
     public String run() {
