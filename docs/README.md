@@ -1,7 +1,6 @@
 # Lemon User Guide
 
-
-// Product screenshot goes here
+![](D:\Ui.png)
 
 Lemon is a chatbot for you to efficiently **manage your tasks via a Graphical User Interface (GUI)**.
 Besides managing tasks, it also provides the user with **emotional support** when they feel stressed about completing their tasks. 
