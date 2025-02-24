@@ -37,6 +37,10 @@ public class UI {
         return "Ohh sorry I don't understand this...";
     }
 
+    public String displayWrongFormatMessage() {
+        return "Sorry, the format of the command is not correct!";
+    }
+
     public String getInput() {
         return scanner.nextLine();
     }

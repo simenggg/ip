@@ -22,30 +22,75 @@ public class Lemon {
 
     public String getResponse(String input) {
         Command command = Parser.parse(input);
+        int inputLength = input.split(" ").length;
         String message = "";
         switch (command.getType()) {
         case LIST:
-            message = tasklist.listTask();
+            if(inputLength > 1) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                message = tasklist.listTask();
+            }
             break;
+
         case EXIT:
-            storage.storeTasks(tasklist.getTasks());
-            message = ui.displayExitMessage();
+            if(inputLength > 1) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                storage.storeTasks(tasklist.getTasks());
+                message = ui.displayExitMessage();
+            }
             break;
+
         case MARK:
-            String[] parts1 = input.split(" ");
-            message = tasklist.markTask(Integer.parseInt(parts1[1]));
+            if(inputLength != 2) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                String[] parts1 = input.split(" ");
+                try {
+                    int index = Integer.parseInt(parts1[1]);
+                    message = tasklist.markTask(index);
+                } catch (NumberFormatException e) {
+                    message = ui.displayWrongFormatMessage();
+                }
+            }
             break;
+
         case UNMARK:
-            String[] parts2 = input.split(" ");
-            message = tasklist.unmarkTask(Integer.parseInt(parts2[1]));
+            if(inputLength != 2) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                String[] parts2 = input.split(" ");
+                try {
+                    int index = Integer.parseInt(parts2[1]);
+                    message = tasklist.unmarkTask(index);
+                } catch (NumberFormatException e) {
+                    message = ui.displayWrongFormatMessage();
+                }
+            }
             break;
+
         case DELETE:
-            String[] parts3 = input.split(" ");
-            message = tasklist.deleteTask(Integer.parseInt(parts3[1]));
+            if(inputLength != 2) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                String[] parts3 = input.split(" ");
+                try {
+                    int index = Integer.parseInt(parts3[1]);
+                    message = tasklist.deleteTask(index);
+                } catch (NumberFormatException e) {
+                    message = ui.displayWrongFormatMessage();
+                }
+            }
             break;
+
         case FIND:
-            String[] parts4 = input.split(" ");
-            message = tasklist.findTask(parts4[1]);
+            if(inputLength < 2) {
+                message = ui.displayWrongFormatMessage();
+            } else {
+                String[] parts4 = input.split(" ");
+                message = tasklist.findTask(parts4[1]);
+            }
             break;
         case HELP:
             message = Help.getHelpPage();
@@ -68,21 +113,30 @@ public class Lemon {
 
     public String handleAddingTask(String input) {
         String addMessage = "";
-        //need to deal with the exception that description is not complete
         String[] parts = input.split(" ", 2);
-        if (parts[0].equals("todo")) {
-            Todo newTask = new Todo(parts[1]);
-            addMessage = tasklist.addTask(newTask);
-
-        } else if (parts[0].equals("deadline")) {
-            String[] details = parts[1].split("/by ");
-            Deadline newTask = new Deadline(details[0], LocalDate.parse(details[1]));
-            addMessage = tasklist.addTask(newTask);
-
-        } else if (parts[0].equals("event")) {
-            String[] details = parts[1].split("/from | /to ");
-            Event newTask = new Event(details[0], details[1], details[2]);
-            addMessage = tasklist.addTask(newTask);
+        if (parts.length < 2) {
+            addMessage = "Sorry! The description of a task cannot be empty!";
+        } else {
+            if (parts[0].equals("todo")) {
+                Todo newTask = new Todo(parts[1]);
+                addMessage = tasklist.addTask(newTask);
+            } else if (parts[0].equals("deadline")) {
+                String[] details = parts[1].split("/by ");
+                if(details.length < 2) {
+                    addMessage = "Sorry! The description of deadline task is not correct!";
+                } else {
+                    Deadline newTask = new Deadline(details[0], LocalDate.parse(details[1]));
+                    addMessage = tasklist.addTask(newTask);
+                }
+            } else if (parts[0].equals("event")) {
+                String[] details = parts[1].split("/from | /to ");
+                if(details.length < 3) {
+                    addMessage = "Sorry! The description of event task is not correct!";
+                } else {
+                    Event newTask = new Event(details[0], details[1], details[2]);
+                    addMessage = tasklist.addTask(newTask);
+                }
+            }
         }
         return addMessage;
     }
